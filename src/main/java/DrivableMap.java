@@ -28,7 +28,21 @@ class DrivableMap {
      *       Return true if the Drivable was added to drivable_map.
      */
 
-
+    /**
+     * Add the ID, object pair into drivable_map if this
+     * id is not in the map.
+     * @param id the id
+     * @param item the Drivable object
+     * @return true if successfully added the id, object pair
+     */
+    public boolean addDrivable(String id, Drivable item) {
+        if (drivable_map.containsKey(id)) {
+            return false;
+        } else {
+            drivable_map.put(id, item);
+            return true;
+        }
+    }
 
 
     /* TODO: Write a method named hasFasterThan that takes an int (a speed)
@@ -38,6 +52,26 @@ class DrivableMap {
      * iterate through drivable_map.
      */
 
+    /**
+     * Determines if there is at least one item in drivable_map
+     * that has a maxSpeed >= speed
+     * @param speed the speed to be compared with
+     * @return whether any item in drivable_map has a maxSpeed >= speed
+     */
+    public boolean hasFasterThan(int speed) {
+
+        for (String id : drivable_map.keySet()) {
+            Drivable item = drivable_map.get(id);
+            int item_speed = item.getMaxSpeed();
+
+            if (item_speed >= speed) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
 
 
 
@@ -46,6 +80,21 @@ class DrivableMap {
      *       returns a List containing all of the Tradable items in
      *       drivable_map.
      */
+
+    public List<Tradable> getTradable() {
+
+        List<Tradable> lst_so_far = new ArrayList<>();
+
+        for (String id : drivable_map.keySet()) {
+            Drivable item = drivable_map.get(id);
+            if (item instanceof Tradable) {
+                lst_so_far.add((Tradable) item);
+            }
+        }
+
+        return lst_so_far;
+
+    }
 
 
 
